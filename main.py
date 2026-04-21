@@ -42,11 +42,13 @@ while counter < len(unique_skus):
                 template_copy.iloc[list_counter,9] = df["Store IDs"][sku_counter]
                 template_copy.iloc[list_counter,12] = df["Product Sku"][sku_counter]
                 template_copy.iloc[list_counter,13] = df["New Price"][sku_counter]
+                sku = df["Product Sku"][sku_counter]
+                price = df["New Price"][sku_counter]
                 sku_counter += 1
                 list_counter += 1
             else:
                 sku_counter += 1
-        template_copy.iloc[1,0] = df["Product Sku"][counter].astype(str) + " TPC" + df["New Price"][counter].astype(str)
+        template_copy.iloc[1,0] = sku.astype(str) + " TPC" + price.astype(str)
         template_copy.iloc[template_copy.index[2:],[12, 13]] = pd.NA      
         template_copy.to_csv(f"cmpdrive2trmsoffer_IPI_WHSTPC_{user_id}"+unique_skus[counter]+".csv", index = False)
         counter += 1
