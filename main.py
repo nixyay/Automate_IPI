@@ -32,6 +32,7 @@ user_id = df["User ID"][0]
 
 name = {}
 counter = 0
+promo_name_list = {}
 
 while counter < len(unique_skus):
         template_copy = template.copy()
@@ -48,7 +49,14 @@ while counter < len(unique_skus):
                 list_counter += 1
             else:
                 sku_counter += 1
-        template_copy.iloc[1,0] = sku.astype(str) + " TPC" + price.astype(str)
+        template_copy.iloc[1,0] = "TPC "+ price.astype(str) + " " + sku.astype(str)
+        # promo_name_list = {"Promotion Name": template_copy.iloc[1,0]}
+        # promo_name_list = {"Count of SKUs": list_counter - 1}
         template_copy.iloc[template_copy.index[2:],[12, 13]] = pd.NA      
-        template_copy.to_csv(f"cmpdrive2trmsoffer_IPI_WHSTPC_{user_id}"+unique_skus[counter]+".csv", index = False)
+        template_copy.to_csv(f"cmpdrive2trmsoffer_IPI_WHSTPC_{user_id}"+unique_skus[counter]+"v2.csv", index = False)
+        
         counter += 1
+
+# pd.DataFrame(promo_name_list)
+# print(promo_name_list)
+# pd.DataFrame({"Promotion Name": promo_name_list}).to_csv(f"Promotion Names {user_id}.csv", index = False)
